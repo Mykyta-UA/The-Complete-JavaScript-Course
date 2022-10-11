@@ -61,16 +61,51 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+const displayMovements = function (movements) {
+  movements.forEach((value, index, arr) => {
+    const condition = value < 0 ? 'withdrawal' : 'deposit';
+    const html = `  
+    <div class="movements__row">
+     <div class="movements__type movements__type--${condition}">${condition}</div>
+     <div class="movements__value">${value}€</div>
+   </div>
+   `;
+    //containerMovements.innerHTML += html;
+    containerMovements.insertAdjacentHTML('afterbegin', html);
+  });
+};
+displayMovements(account1.movements);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
 
-const currencies = new Map([
-  ['USD', 'United States dollar'],
-  ['EUR', 'Euro'],
-  ['GBP', 'Pound sterling'],
-]);
+// const currencies = new Map([
+//   ['USD', 'United States dollar'],
+//   ['EUR', 'Euro'],
+//   ['GBP', 'Pound sterling'],
+// ]);
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
+
+// for (const movement of movements) {
+//   if (movement > 0) {
+//     console.log(`You deposited ${movement}$`);
+//   } else {
+//     console.log(`You withdraw ${Math.abs(movement)}$`);
+//   }
+// }
+const dogsJulia = [3, 5, 2, 12, 7];
+const dogsKate = [4, 1, 15, 8, 3];
+function checkDogs(dogsJulia, dogsKate) {
+  let shallowCopyJulia = dogsJulia.slice(1, -2);
+  console.log(shallowCopyJulia);
+  let dogArr = shallowCopyJulia.concat(dogsKate);
+  console.log(dogArr);
+  dogArr.forEach((value, index, arr) => {
+    value > 3 ? console.log('adult') : console.log('puppy');
+  });
+}
+checkDogs(dogsJulia, dogsKate);
