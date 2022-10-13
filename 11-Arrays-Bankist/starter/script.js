@@ -73,7 +73,6 @@ const displayMovements = function (movements) {
     //containerMovements.innerHTML += html;
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
-  labelBalance.textContent = `${account1.total}$`;
 };
 
 const createUserName = accounts => {
@@ -93,8 +92,47 @@ const calcPrintBalance = accounts => {
 };
 calcPrintBalance(accounts);
 createUserName(accounts);
-displayMovements(account1.movements);
 
+const calcDisplaySummary = acc => {
+  const income = acc.movements
+    .filter(el => el > 0)
+    .reduce((sum, cur) => sum + cur, 0);
+  const spedning = acc.movements
+    .filter(el => el < 0)
+    .reduce((sum, cur) => sum + cur, 0);
+  const interest = acc.movements
+    .filter(el => el > 0)
+    .map((el, i, arr) => (el * 1.2) / 100)
+    .filter(el => el >= 1)
+    .reduce((total, cur) => total + cur);
+
+  labelSumInterest.innerHTML = `${interest}$`;
+  labelSumIn.innerHTML = `${income}$`;
+  labelSumOut.innerHTML = `${spedning}$`;
+};
+
+//Event handler
+let currentAccount;
+btnLogin.addEventListener('click', e => {
+  e.preventDefault();
+
+  currentAccount = accounts.find(
+    acc => acc.username === inputLoginUsername.value
+  );
+  console.log(currentAccount);
+
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    labelWelcome.textContent = `Welcome back, ${
+      currentAccount.owner.split(' ')[0]
+    }`;
+    containerApp.style.opacity = 100;
+    displayMovements(currentAccount.movements);
+    calcDisplaySummary(currentAccount);
+    labelBalance.textContent = `${currentAccount.total}$`;
+    inputLoginPin.textContent = inputLoginUsername.textContentgit  = '';
+    console.log('loggin');
+  }
+});
 //console.log(accounts);
 
 // const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
@@ -149,18 +187,18 @@ displayMovements(account1.movements);
 
 // § Data1:[5,2,4,1,15,8,3] § Data2:[16,6,10,5,6,1,4]
 
-const calcAvgHumanAge = ages => {
-  let humanAge = [];
-  ages.forEach((value, index) => {
-    humanAge[index] = value <= 2 ? 2 * value : 16 + value * 4;
-  });
-  const filterDogs = humanAge.reduce(
-    (total, current, index, arr) => total + current / arr.length,
-    0
-  );
-  console.log(humanAge);
-  console.log(filterDogs);
+// const calcAvgHumanAge = ages => {
+//   let humanAge = [];
+//   ages.forEach((value, index) => {
+//     humanAge[index] = value <= 2 ? 2 * value : 16 + value * 4;
+//   });
+//   const filterDogs = humanAge.reduce(
+//     (total, current, index, arr) => total + current / arr.length,
+//     0
+//   );
+//   console.log(humanAge);
+//   console.log(filterDogs);
 
-  return humanAge;
-};
-calcAvgHumanAge([5, 2, 4, 1, 15, 8, 3]);
+//   return humanAge;
+// };
+// calcAvgHumanAge([5, 2, 4, 1, 15, 8, 3]);
