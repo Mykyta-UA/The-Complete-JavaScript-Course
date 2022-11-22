@@ -123,6 +123,8 @@ const calcDisplaySummary = acc => {
 
 //Event handler
 let currentAccount;
+currentAccount = account1;
+updateUI(currentAccount);
 btnLogin.addEventListener('click', e => {
   e.preventDefault();
 
@@ -292,58 +294,58 @@ btnSort.addEventListener('click', e => {
 //   );
 // console.log(sums);
 
-const dogs = [
-  { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
-  { weight: 8, curFood: 200, owners: ['Matilda'] },
-  { weight: 13, curFood: 275, owners: ['Sarah', 'John'] },
-  { weight: 32, curFood: 340, owners: ['Michael'] },
-];
+// const dogs = [
+//   { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
+//   { weight: 8, curFood: 200, owners: ['Matilda'] },
+//   { weight: 13, curFood: 275, owners: ['Sarah', 'John'] },
+//   { weight: 32, curFood: 340, owners: ['Michael'] },
+// ];
 
-dogs.map(dog => {
-  dog.recommendedFood = dog.weight ** 0.75 * 28;
-});
-console.log(dogs);
+// dogs.map(dog => {
+//   dog.recommendedFood = dog.weight ** 0.75 * 28;
+// });
+// console.log(dogs);
 
-const sarahsDog = dogs.filter(dog => dog.owners.includes('Sarah'));
+// const sarahsDog = dogs.filter(dog => dog.owners.includes('Sarah'));
 
-sarahsDog[0].curFood > sarahsDog[0].recommendedFood
-  ? console.log('your dog is over eating')
-  : console.log('your dog is fine');
+// sarahsDog[0].curFood > sarahsDog[0].recommendedFood
+//   ? console.log('your dog is over eating')
+//   : console.log('your dog is fine');
 //console.log(sarahsDog[0]);
 
 //const {overEatingDogs, notEatingEnough} = dogs.filter(dog => dog.curFood > dog.recommendedFood);
 
-const sums = dogs
-  .map(dog => {
-    console.log(dog);
-    return dog;
-  })
-  .reduce(
-    (sum, cur) => {
-      if (cur.curFood != cur.recommendedFood)
-        cur.curFood > cur.recommendedFood
-          ? sum.overEatingDogs.push(cur)
-          : sum.ownersEatTooLittle.push(cur);
-      cur.curFood > cur.recommendedFood * 0.9 &&
-        cur.curFood < cur.recommendedFood * 1.1 ? console.log(`${cur.owners} feeding enough`) : console.log();
-      return sum;
-    },
-    { overEatingDogs: [], ownersEatTooLittle: [] }
-  );
+// const sums = dogs
+//   .map(dog => {
+//     console.log(dog);
+//     return dog;
+//   })
+//   .reduce(
+//     (sum, cur) => {
+//       if (cur.curFood != cur.recommendedFood)
+//         cur.curFood > cur.recommendedFood
+//           ? sum.overEatingDogs.push(cur)
+//           : sum.ownersEatTooLittle.push(cur);
+//       cur.curFood > cur.recommendedFood * 0.9 &&
+//         cur.curFood < cur.recommendedFood * 1.1 ? console.log(`${cur.owners} feeding enough`) : console.log();
+//       return sum;
+//     },
+//     { overEatingDogs: [], ownersEatTooLittle: [] }
+//   );
 
-console.log(sums);
+// console.log(sums);
 
-const { overEatingDogs, ownersEatTooLittle } = sums;
-let namesOverEat = [];
-overEatingDogs.forEach((el, i, arr) => {
-  namesOverEat[i] = el.owners;
-});
-namesOverEat = namesOverEat.flat();
-console.log(`${namesOverEat.join(' and ')}`);
+// const { overEatingDogs, ownersEatTooLittle } = sums;
+// let namesOverEat = [];
+// overEatingDogs.forEach((el, i, arr) => {
+//   namesOverEat[i] = el.owners;
+// });
+// namesOverEat = namesOverEat.flat();
+// console.log(`${namesOverEat.join(' and ')}`);
 
-let namesTooLittleEat = [];
-ownersEatTooLittle.forEach((el, i, arr) => {
-  namesTooLittleEat[i] = el.owners;
-});
-namesTooLittleEat = namesTooLittleEat.flat();
-console.log(namesTooLittleEat);
+// let namesTooLittleEat = [];
+// ownersEatTooLittle.forEach((el, i, arr) => {
+//   namesTooLittleEat[i] = el.owners;
+// });
+// namesTooLittleEat = namesTooLittleEat.flat();
+// console.log(namesTooLittleEat);
