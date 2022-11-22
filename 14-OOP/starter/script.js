@@ -98,24 +98,75 @@
 // const rob = Object.create(StudentProto);
 
 // rob.init('Robert', 1993, 'Programming');
-// rob.introduce();
+// // rob.introduce();
 
-class Account {
-  constructor(owner, currency, pin, movements) {
-    this.owner = owner;
-    this.currency = currency;
-    this.pin = pin;
-    this.movements = [];
-    this.locale = navigator.language;
-  }
+// class Account {
+//   constructor(owner, currency, pin, movements) {
+//     this.owner = owner;
+//     this.currency = currency;
+//     this.pin = pin;
+//     this.movements = [];
+//     this.locale = navigator.language;
+//   }
 
-  deposit(val) {
-    this.movements.push(val);
+//   deposit(val) {
+//     this.movements.push(val);
+//   }
+//   withdraw(val) {
+//     this.deposit(-val);
+//   }
+//   requestLoan() {
+//     return
+//   }
+// }
+
+// const acc1 = new Account('Mykyta', 'HRN', 1111, 900);
+
+// Challenge #3
+class CarlCl {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
   }
-  withdraw(val) {
-    this.deposit(-val);
+  accelerate() {
+    this.speed += 10;
+    console.log(
+      `${this.make} has increased speed on 10 km, new speed is ${this.speed}km/h`
+    );
   }
-  requestLoan() {}
+  brake() {
+    this.speed -= 5;
+    console.log(`Speed has been decreased, Speed: ${this.speed}`);
+    return this;
+  }
+  get speedUS() {
+    return this.speed / 1.6;
+  }
+  set speedUS(speed) {
+    this.speed = speed * 1.6;
+  }
 }
 
-const acc1 = new Account('Mykyta', 'HRN', 1111, 900);
+class EVCl extends CarlCl {
+  #charge;
+  constructor(make, speed, charge) {
+    super(make, speed);
+    this.#charge = charge;
+  }
+  chargeBattery(chargeTo) {
+    this.#charge = chargeTo;
+    return this;
+  }
+  accelerate() {
+    this.speed += 20;
+    this.#charge--;
+    console.log(
+      `${this.make} has increased speed, new speed is ${
+        this.speed
+      }km/h, battery at ${this.#charge}%`
+    );
+    return this;
+  }
+}
+
+const tesla = new EVCl('Tesla', 100, 100);
